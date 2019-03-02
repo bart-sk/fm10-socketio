@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "lib": ["esnext.asynciterable", "es2018"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "removeComments": false,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "@types"
+    ],
+    "paths": {
+      "core/*": ["core/src/*"],
+      "lib/*": ["src/lib/*"],
+      "drivers/*": ["src/drivers/*"]
+    }
+  },
+  "include":[
+    "./src",
+    "./core"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "compiled",
+    "config",
+    "tmp"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

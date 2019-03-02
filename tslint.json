@@ -1,0 +1,69 @@
+{
+  "linterOptions": {
+    "exclude": [
+      "src/*.d.ts"
+    ]
+  },
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-console": false,
+    "arrow-parens": false,
+    "class-name": true,
+    "curly": false,
+    "eofline": true,
+    "indent": ["spaces"],
+    "max-line-length": [true, {"limit": 120, "ignore-pattern": "^import |^export {(.*?)}|class [a-zA-Z]+ implements |//"}],
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "member-ordering": [true,
+      "public-before-private",
+      "static-before-instance",
+      "variables-before-functions"
+    ],
+    "prefer-const": true,
+    "deprecation": true,
+    "no-arg": true,
+    "no-construct": true,
+    "no-duplicate-variable": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "one-line": [true,
+      "check-open-brace",
+      "check-catch",
+      "check-else",
+      "check-whitespace"
+    ],
+    "quotemark": [true, "single", "avoid-escape"],
+    "semicolon": [true, "always"],
+    "trailing-comma": true,
+    "triple-equals": true,
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "allow-snake-case",
+      "ban-keywords",
+      "check-format"
+    ],
+    "interface-name": [false, "always-prefix"],
+
+    "only-arrow-functions": false,
+    "no-string-literal": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "no-string-throw": true,
+    "array-type": [true, "array"],
+
+    "no-console": [true,
+      "time",
+      "timeEnd",
+      "trace"
+    ]
+  }
+}

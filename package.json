@@ -1,0 +1,32 @@
+{
+  "name": "socket-server",
+  "version": "1.0.0",
+  "description": "Init project for socket.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=socket.io* nodemon -e js,yaml,ts,json --delay 0.5 --ignore dist --exec 'node --inspect=0.0.0.0 -r ts-node/register -r tsconfig-paths/register ./src/app.ts'"
+  },
+  "keywords": [],
+  "author": "Stano Svidran - Bart.sk",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "~2.2.0",
+    "request": "~2.88.0",
+    "tsconfig-paths": "~3.7.0",
+    "config": "~3.0.1",
+    "debug": "~4.1.1",
+    "moment": "~2.24.0"
+  },
+  "devDependencies": {
+    "@types/socket.io": "~2.1.2",
+    "@types/node": "~10.12.18",
+    "typescript": "~3.2.2",
+    "ts-node": "~7.0.1",
+    "nodemon": "~1.18.9",
+    "@types/config": "~0.0.34",
+    "@types/debug": "~0.0.31",
+    "tslint": "~5.12.1",
+    "prettier": "~1.15.3",
+    "tslint-config-prettier": "~1.17.0"
+  }
+}
