@@ -7,12 +7,11 @@ class SocketError extends Error {
 }
 
 class Message {
-    constructor(public date: number, public userId: string, public content?: string|object) {}
+    constructor(public date: number, public userId: string, public nick: string, public content?: string|object) {}
 }
 
 class User {
     nick: string;
-    face: string;
     socket: Socket;
     messages: Message[] = [];
 
@@ -23,7 +22,6 @@ class User {
     profile() {
         return {
             nick: this.nick,
-            face: this.face,
             id: this.id
         };
     }
@@ -41,11 +39,10 @@ const server = io(3000);
 // middleware
 server.use((socket, next) => {
     const name = socket.handshake.query.nick;
-    const face = socket.handshake.query.face;
-    if (name && face) {
+    if (name) {
         return next();
     } else {
-        const err = new SocketError('Authentication error, missing nick or face (url to your face picture :))');
+        const err = new SocketError('Authentication error, missing nick');
         return next(err);
     }
 
@@ -59,7 +56,6 @@ const general: Namespace = server.of('/').on('connection', (client) => {
     const user = new User();
     user.socket = client;
     user.nick = client.handshake.query.nick;
-    user.face = client.handshake.query.face;
     chat(user, general, stack.get('/'));
 });
 
@@ -73,26 +69,24 @@ const general: Namespace = server.of('/').on('connection', (client) => {
 // });
 
 function chat(user: User, root: Namespace, group: Group) {
-    const joinMessage = new Message(moment.now(), user.id, user.profile());
-    user.socket.emit('users', group.users.map((item) => item.profile()));
-
-    user.socket.broadcast.emit('join', joinMessage);
     group.users.push(user);
+    user.socket.emit('users', group.users.map((item) => item.profile()));
+    user.socket.emit('messages', group.messages);
 
-    for (const pastMessage of group.messages) {
-        user.socket.emit('message', pastMessage);
-    }
+    const joinMessage = new Message(moment.now(), user.id, user.nick);
+    user.socket.broadcast.emit('join', joinMessage);
 
-    user.socket.on('send', (data: string) => {
-        const message = new Message(moment.now(), user.id, data);
+
+    user.socket.on('send', (text: string) => {
+        const message = new Message(moment.now(), user.id, user.nick, text);
         user.messages.push(message);
         group.messages.push(message);
         root.emit('message', message);
     });
 
     user.socket.on('disconnect', (data: any) => {
-        const message = new Message(moment.now(), user.id);
+        const message = new Message(moment.now(), user.id, user.nick);
         root.emit('leave', message);
-        // group.users.splice(group.users.indexOf(user), 1);
+        group.users.splice(group.users.indexOf(user), 1);
     });
 }
