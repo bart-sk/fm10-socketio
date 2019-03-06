@@ -4,7 +4,7 @@
   "description": "Init project for socket.io",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=socket.io* nodemon -e js,yaml,ts,json --delay 0.5 --ignore dist --exec 'node --inspect=0.0.0.0 -r ts-node/register -r tsconfig-paths/register ./src/app.ts'"
+    "start": "DEBUG=socket.io* nodemon -e js,yaml,ts,json --delay 0.5 --ignore client --exec 'node --inspect=0.0.0.0 -r ts-node/register -r tsconfig-paths/register ./src/app.ts'"
   },
   "keywords": [],
   "author": "Stano Svidran - Bart.sk",
